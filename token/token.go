@@ -2,33 +2,65 @@ package token
 
 type TokenType string
 
-const(
-	ILLEGAL="ILLEGAL"  //special types- a token/char we don't know of 
-	EOF="EOF"           //special types- end of file, tells parser to stop
+const (
+	ILLEGAL = "ILLEGAL"
+	EOF     = "EOF"
 
 	// Identifiers + literals
-	IDENT="IDENT"
-	INT="INT"
+	IDENT = "IDENT" // add, foobar, x, y, ...
+	INT   = "INT"   // 1343456
 
 	// Operators
-	ASSIGN="="
-	PLUS="+"
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
 
-	// Delimiters
-	COMMA=","
-	SEMICOLON=";"
+	LT = "<"
+	GT = ">"
 
-	LPAREN="("
-	RPAREN=")"
-	LBRACE="{"
-	RBRACE="}"
+	EQ     = "=="
+	NOT_EQ = "!="
 
-	// Keywords
-	FUNCTION="FUNCTION"
-	LET="LET"
+	// Delimiters help separate pieces of code
+	COMMA     = ","
+	SEMICOLON = ";"
+
+	LPAREN = "("
+	RPAREN = ")"
+	LBRACE = "{"
+	RBRACE = "}"
+
+	// Keywords have special meaning in the language
+	FUNCTION = "FUNCTION"
+	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
-type Token struct{
-	type TokenType
-	literal string
+type Token struct {
+	Type    TokenType
+	Literal string
+}
+
+var keywords = map[string]TokenType{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
+}
+
+func LookupIdent(ident string) TokenType {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
 }
