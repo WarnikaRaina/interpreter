@@ -15,6 +15,7 @@ func New(input string) *Lexer {
 	return l
 }
 
+//go doesnt have classes
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
