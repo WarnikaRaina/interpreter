@@ -6,6 +6,7 @@ import (
 	"monkey/token"
 )
 
+// in go func TestSomething(t *testing.T) is a test function. It will be run when we run go test
 func TestNextToken(t *testing.T) {
 	input := `let five = 5;
 let ten = 10;
